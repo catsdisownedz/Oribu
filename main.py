@@ -22,11 +22,14 @@ faces = faceCascade.detectMultiScale(
         flags=cv2.cv.CV_HAAR_SCALE_IMAGE
     )
 for (x, y, w, h) in faces:
-  cv2.rectangle(frame, (x, y), (x+w, y+h), (44 , 250 , 120 ), 2)
+  cv2.rectangle(frame, (x, y), (x+w, y+h), (44 , 250 , 120 ), 1.5)
  #showing the frame  
  cv2.imshow('Video', frame)
   
-  
+if cv2.waitKey(1) & 0xFF == ord('q'):
+    break
+video_capture.release()
+cv2.destroyAllWindows()
 #dont forget scale factor
 
 #criminal identification
