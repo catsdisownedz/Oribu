@@ -31,10 +31,14 @@ for file in os.listdir(os.path.join('lfw', directory)):
 #face recognition from webcam
 #cascPath = sys.argv[1]
 faceCascade = cv2.CascadeClassifier(r"C:\Users\nadam\Downloads\opencv\sources\data\haarcascades\haarcascade_frontalface_default.xml")
-video_capture = cv2. VideoCapture(0)
+video_capture = cv2.VideoCapture(0)
+
 #capturing frame by frame 
 while True:
     ret, frame = video_capture.read()
+    #capturing anchor images
+    imgname = os.path.join(anc_path,f'{str(uuid.uuid1())}.jpg')
+    cv2.imwrite(imgname, frame)
 #turning into grayscale and making a rectangle appear around face 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = faceCascade.detectMultiScale(
@@ -47,13 +51,11 @@ while True:
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (44 , 250 , 120 ), 1)
     #captures images in video for comparision
-    if cv2.waitKey(1) & 0xFF == ord('a'):
-        imgname = os.path.join(anc_path, '{}.jpg'.format(uuid.uuid1()))
-        cv2.imwrite(imgname, frame)
+    '''
     if cv2.waitKey(1) & 0xFF == ord('p'):
         imgname = os.path.join(pos_path, '{}.jpg'.format(uuid.uuid1()))
         cv2.imwrite(imgname, frame)
-
+    '''
     #showing the frame  
     cv2.imshow('Video', frame)
     
@@ -63,6 +65,7 @@ video_capture.release()
 cv2.destroyAllWindows()
 
 anchor = tf.data.Dataset.list_files(anc_path+'\*.jpg').take(300)
+'''
 positive = tf.data.Dataset.list_files(pos_path+'\*.jpg').take(300)
 negative = tf.data.Dataset.list_files(neg_path+'\*.jpg').take(300)
 
@@ -106,7 +109,25 @@ test_data = data.skip(round(len(data)*.7))
 test_data = data.take(round(len(data)*.3))
 test_data = train_data.batch(16)
 test_data = train_data.prefetch(8)
+'''
 
+def clear():
+    for filetype in ['anchor']:
+        for img in os.lisdtdir(filetype):
+            for clearing in os.listdir('clear'):
+                try:
+                    current_img_path = str(filetype)+'/'+str(img)
+                    clearing = cv2.imread('clear/'+str(clearing))
+                    ques = cv2.imread(current_img_path)
+
+                    if clearing.shape == ques.shape and not(np.bitwise_xor(clearing,ques).any()):
+                        print(current_img_path)
+                        os.remove(current_img_path)
+
+                except Exception as e:
+                    print(str(e))
+
+clear()
 
 #criminal identification
 
