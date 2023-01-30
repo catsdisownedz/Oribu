@@ -109,7 +109,7 @@ test_data = data.skip(round(len(data)*.7))
 test_data = data.take(round(len(data)*.3))
 test_data = train_data.batch(16)
 test_data = train_data.prefetch(8)
-'''
+
 
 def clear():
     for filetype in ['anchor']:
@@ -128,7 +128,7 @@ def clear():
                     print(str(e))
 
 clear()
-
+'''
 #criminal identification
 
 #alert
