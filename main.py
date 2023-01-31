@@ -61,6 +61,16 @@ while True:
     
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+
+    # TODO: Identify if criminal
+    isIdentified = True
+    #neg_path = '.../data/negative' + '/zeina_ahmed' + '/3287342.jpg'
+    
+    if isIdentified:
+        name = "zeina_ahmed"
+        imgname = os.path.join(neg_path, name + '/{}.jpg'.format(uuid.uuid1()))
+        cv2.imwrite(imgname, frame)
+
 video_capture.release()
 cv2.destroyAllWindows()
 
