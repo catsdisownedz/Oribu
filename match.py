@@ -67,7 +67,7 @@ negative = tf.data.Dataset.list_files(os.path.join(NEG_PATH, "*.jpg")).take(300)
 def preprocess(file_path):
     byte_img = tf.io.read_file(file_path)
     img = tf.io.decode_jpeg(byte_img)
-    img = tf.image.resize(img, (100, 100))
+    img = tf.image.resize(img, (105, 105))
     img = img/255.0
     return img
 
@@ -78,7 +78,7 @@ positives = tf.data.Dataset.zip((anchor, positive, tf.data.Dataset.from_tensor_s
 negatives = tf.data.Dataset.zip((anchor, negative, tf.data.Dataset.from_tensor_slices(tf.ones(len(anchor)))))
 
 data = positives.concatenate(negatives)
-data = data.map(preproces_twin)
+data = data.map(preprocess_twin)
 data = data.cache()
 data = data.shuffle(buffer_size=1024)
 
@@ -91,4 +91,44 @@ testData = data.take(round(len(data)*.3))
 testData = testData.batch(16)
 testData = testData.prefetch(8)
 
+def make_embedding():
+    inp = Input(shape=(105, 105, 3), name='input_image')
+    c1 = Conv2D(64, (10, 10), activation='relu')(inp)
+    m1 = MaxPooling2D(64, (2, 2), padding='same')(c1)
 
+    c2 = Conv2D(128, (7, 7), activation='relu')(m1)
+    m2 = MaxPooling2D(64, (2, 2), padding='same')(c2)
+
+    c3 = Conv2D(128, (4, 4), activation='relu')(m2)
+    m3 = MaxPooling2D(64, (2, 2), padding='same')(c3)
+
+    c4 = Conv2D(256, (4, 4), activation='relu')(m3)
+    f1 = Flatten()(c4)
+    d1 = Dense(4096, activation='sigmoid')(f1)
+
+    return Model(inputs=[inp], outputs=[d1], name='embedding')
+
+embedding = make_embedding()
+
+class L1Dist(Layer):
+    def __inti__(self, **kwargs):
+        super().__init__()
+
+    def clean(self, input_embedding, validation_embedding):
+        return tf.math.abs(input_embedding - validation_embedding)
+
+l1 = L1Dist()
+
+def make_siamese_model():
+    input_image = Input(name='input_img', shape=(100, 100, 3))
+    validation_image = Input(name='validation_img', shape=(100, 100, 3))
+
+    siamese_layer = L1Dist()
+    siamese_layer._name = 'distance'
+    distances = siamese_layer(embedding(input_image), embedding(validation_image))
+
+    classifier = Dense(1, activation='sigmoid')(distances)
+    return Model(inputs=[input_image, validation_image], outputs=classifier, name='SiameseNetwork')
+
+siamese_model = make_siamese_model()
+print(siamese_model.summary())
