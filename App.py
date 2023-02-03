@@ -8,12 +8,20 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.widget import Widget
 from plyer import notification
 
+'''def crim_sighting():
+    name = name
+    security_risk = risk_level
+    icon = risk dependant
+'''
+
 def callback():
     notification.notify(
         title = 'Criminal Activity',
-        message = 'Criminal sighted',
+        message = 'Criminal Sighted',
+        # message = crim_sighting(),
         app_icon = r"C:\Users\nadam\OneDrive\Documents\GitHub\Obiru\police-badge.ico",
         timeout = 10,)
+        
     
 
 def button_click(self):
@@ -26,11 +34,11 @@ class Homepage(ScrollView):
 class Stack(StackLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        b1 = Button(text = "Criminal Prediction")
-        b2 = Button(text = "Click here for more")
-        b2.bind(on_press = callback)
-        self.add_widget(b1)
-        self.add_widget(b2)
+        #b1 = Button(text = "Criminal Prediction")
+        #b2 = Button(text = "Click here for more")
+        #b2.bind(on_press = callback)
+        #self.add_widget(b1)
+        #self.add_widget(b2)
 
 
 class Anchor(AnchorLayout):

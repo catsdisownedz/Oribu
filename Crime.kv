@@ -3,13 +3,19 @@ Homepage:
 <Homepage>:
     Stack:
         size_hint: 1,None
-        height: self.minimum_height
+        height: self.minimum_height 
         Label: 
             text: "Criminal Activity"
+            height: "10dp"
+            size_hint_y: None
         Widget:
             text: ""
+            height: "10dp"
+            size_hint_y: None
         Button:
             #spacing: "5dp"
+            height: "10dp"
+            size_hint_y: None
             text: "Click here for more"
             on_press: root.button_click()
             #size: "200dp", "200dp"
