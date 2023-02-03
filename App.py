@@ -11,7 +11,7 @@ from plyer import notification
 '''def crim_sighting():
     name = name
     security_risk = risk_level
-    icon = risk dependant
+    icon = security risk dependant (changes color depending on risk)
 '''
 
 def callback():
@@ -21,13 +21,15 @@ def callback():
         # message = crim_sighting(),
         app_icon = r"C:\Users\nadam\OneDrive\Documents\GitHub\Obiru\police-badge.ico",
         timeout = 10,)
-        
+    
     
 
 def button_click(self):
     print(callback())
     
 class Homepage(ScrollView):
+     #if isIdentified = True:  
+     #print(callback()) 
     def button_click(self):
         print(callback()) 
 
@@ -63,5 +65,7 @@ class MainWidget (Widget):
 class CrimeApp (App):
     pass
 
-#if isIdentified = True:
+  #if isIdentified = True:  
+  #     print(callback()) 
+
 CrimeApp().run()
