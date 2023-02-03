@@ -1,21 +1,21 @@
-AnchorLayout:
-<AnchorLayout>:
-    Button:
-        text: "Click for more Information"
-        size_hint: .5, .5
+Box:
 
-<BoxLayout>:
+<Box>:
     orientation: 'vertical'
     Label: 
         text: "Criminal Activity"
     Button:
         spacing: "5dp"
-        text: "Click for more information"
+        text: "Click here for more"
         size_hint: .5, .5
+        on_press: root.button_click()
         #size: "200dp", "200dp"
-        pos_hint: {'center_x': .5}
-        
+        #pos_hint: {'center_x': .5}
 
+<AnchorLayout>:
+    Button:
+        text: "Click for more Information"
+        size_hint: .5, .5
 
 <MainWidget>:
     Label:
