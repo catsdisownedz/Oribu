@@ -1,21 +1,22 @@
-Box:
+Homepage:
 
-<Box>:
-    orientation: 'vertical'
-    Label: 
-        text: "Criminal Activity"
-    Button:
-        spacing: "5dp"
-        text: "Click here for more"
-        size_hint: .5, .5
-        on_press: root.button_click()
-        #size: "200dp", "200dp"
-        #pos_hint: {'center_x': .5}
+<Homepage>:
+    Stack:
+        size_hint: 1,None
+        height: self.minimum_height
+        Label: 
+            text: "Criminal Activity"
+        Widget:
+            text: ""
+        Button:
+            #spacing: "5dp"
+            text: "Click here for more"
+            on_press: root.button_click()
+            #size: "200dp", "200dp"
+            #pos_hint: {'center_x': .5}
 
-<AnchorLayout>:
-    Button:
-        text: "Click for more Information"
-        size_hint: .5, .5
+
+
 
 <MainWidget>:
     Label:
