@@ -27,39 +27,38 @@ os.makedirs(NEG_PATH)
 os.makedirs(ANC_PATH)
 '''
 
-#cap = cv2.VideoCapture(0)
-#
-#shiftY = 350 
-#shiftX = 520
-#
-#while cap.isOpened():
-#    ret, frame = cap.read()
-#
-#    frame = frame[shiftY:shiftY+250, shiftX:shiftX+250, :]
-#
-#    if cv2.waitKey(1) & 0XFF == ord('a'):
-#        imgName = os.path.join(ANC_PATH, '{}.jpg'.format(uuid.uuid1()))
-#        cv2.imwrite(imgName, frame)
-#    if cv2.waitKey(1) & 0XFF == ord('p'):
-#        imgName = os.path.join(POS_PATH, '{}.jpg'.format(uuid.uuid1()))
-#        cv2.imwrite(imgName, frame)
-#    if cv2.waitKey(1) & 0XFF == ord('q'):
-#        break
-#    #if cv2.waitKey(1) & 0XFF == ord('w'):
-#    #    shiftY -= 10
-#    #if cv2.waitKey(1) & 0XFF == ord('s'):
-#    #    shiftY += 10
-#    #if cv2.waitKey(1) & 0XFF == ord('d'):
-#    #    shiftX += 10
-#    #if cv2.waitKey(1) & 0XFF == ord('a'):
-#    #    shiftX -= 10
-#    cv2.imshow('Image Collection', frame)
-#
-#
-#cap.release()
-#cv2.destroyAllWindows()
+cap = cv2.VideoCapture(0)
+
+shiftY = 350 
+shiftX = 520
+
+while cap.isOpened():
+    ret, frame = cap.read()
+
+    frame = frame[shiftY:shiftY+250, shiftX:shiftX+250, :]
+
+    if cv2.waitKey(1) & 0XFF == ord('o'):
+        imgName = os.path.join(ANC_PATH, '{}.jpg'.format(uuid.uuid1()))
+        cv2.imwrite(imgName, frame)
+    if cv2.waitKey(1) & 0XFF == ord('p'):
+        imgName = os.path.join(POS_PATH, '{}.jpg'.format(uuid.uuid1()))
+        cv2.imwrite(imgName, frame)
+    if cv2.waitKey(1) & 0XFF == ord('q'):
+        break
+    if cv2.waitKey(1) & 0XFF == ord('w'):
+        shiftY -= 10
+    if cv2.waitKey(1) & 0XFF == ord('s'):
+        shiftY += 10
+    if cv2.waitKey(1) & 0XFF == ord('d'):
+        shiftX += 10
+    if cv2.waitKey(1) & 0XFF == ord('a'):
+        shiftX -= 10
+    cv2.imshow('Image Collection', frame)
 
 
+cap.release()
+cv2.destroyAllWindows()
+'''
 anchor = tf.data.Dataset.list_files(os.path.join(ANC_PATH, "*.jpg")).take(300)
 positive = tf.data.Dataset.list_files(os.path.join(POS_PATH, "*.jpg")).take(300)
 negative = tf.data.Dataset.list_files(os.path.join(NEG_PATH, "*.jpg")).take(300)
@@ -167,3 +166,4 @@ def train(data, EPOCHS):
 
 EPOCHS = 50
 train(trainData, EPOCHS)
+'''
