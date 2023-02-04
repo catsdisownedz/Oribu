@@ -12,9 +12,9 @@ from tensorflow.keras.layers import Layer, Conv2D, Dense, MaxPooling2D, Input, F
 import tensorflow as tf
 
 # Avoid OOM rrros by settign the GPU Consumption Growth
-#gpus = tf.config.experimental.list_physical_devices('GPU')
-#for gpu in gpus:
-#    tf.config.experimental.set_memory_growth(gpu, True)
+gpus = tf.config.experimental.list_physical_devices('GPU')
+for gpu in gpus:
+    tf.config.experimental.set_memory_growth(gpu, True)
 
 # Setup paths
 POS_PATH = os.path.join("data", "positive")
