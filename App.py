@@ -16,6 +16,7 @@ from plyer import notification
     icon = security risk dependant (changes color depending on risk)
 '''
 
+#notification function
 def callback():
     notification.notify(
         title = 'Criminal Activity',
@@ -24,17 +25,21 @@ def callback():
         app_icon = r"C:\Users\nadam\OneDrive\Documents\GitHub\Obiru\police-badge.ico",
         timeout = 10,)
     
-    
 
+#removed when integrated into main.py    
 def button_click(self):
     print(callback())
-    
+
+
+#homepage that will display crime prediction code    
 class Homepage(ScrollView):
      #if isIdentified = True:  
      #print(callback()) 
     def button_click(self):
         print(callback()) 
 
+
+#homepage layout; stack information on top of each other
 class Stack(StackLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -44,12 +49,6 @@ class Stack(StackLayout):
         #self.add_widget(b1)
         #self.add_widget(b2)
 
-class Log(ScrollView):
-    pass
-
-
-class Anchor(AnchorLayout):
-    pass
 
 class Box(BoxLayout):
     def button_click(self):
@@ -62,15 +61,11 @@ class Box(BoxLayout):
         self.add_widget(b1)
         self.add_widget(b2)
 '''
-        
-class MainWidget(Widget):
-    pass
-    
+
+
 
 class CrimeApp(App):
     pass
 
-  #if isIdentified = True:  
-  #     print(callback()) 
 
 CrimeApp().run()

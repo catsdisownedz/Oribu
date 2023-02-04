@@ -1,36 +1,4 @@
-Log:
-
-<Log>:
-    log_level: info
-    log_enable: 1
-    log_dir: logs
-    log_name: 'Criminal Alerts'.txt
-
-<Ball>:
-    size: 65,60
-    canvas:
-        Color:
-            rgb: .75, 0, 0
-        Ellipse:
-            pos: self.pos
-            size: self.size
-    
-<Ex52>:
-    canvas:
-        Color:
-            rgb: 0,0,1
-        Rectangle:
-            size: root.width,root.height
-            pos: 0,0
-    Label:
-        pos: 300,root.top-100
-        text:'[size=32][color=8888CC]touch_down, touch_move[/color][/size]'
-        markup: True
-    Ball:
-
-<Log>:
-    size_hint: 1,None
-    height: self.minimum_height
+Homepage:
 
 <Homepage>:
     Stack:
@@ -52,17 +20,3 @@ Log:
             on_press: root.button_click()
             #size: "200dp", "200dp"
             #pos_hint: {'center_x': .5}
-
-
-
-
-<MainWidget>:
-    Label:
-        text:'Crime Authority'
-        size: "500dp", "300dp"
-        pos: "250dp", "250dp"
-        color: 1, 0, 1 ,1    
-    Button:
-        text: "Hello"
-        size: "50dp", "50dp"
-        pos: 100, 100
