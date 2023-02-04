@@ -7,6 +7,16 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.widget import Widget
 from plyer import notification
+import logging
+
+def notif_log():
+    log = logging.getLogger("Notifications")
+    handler = logging.FileHandler('Notifications.log')
+    formatter = logging.Formatter('%(asctime)s\n %(message)s')
+    handler.setFormatter(formatter)
+    log.addHandler(handler)
+
+    log.info("test custom")
 
 '''def crim_sighting():
     name = name
@@ -41,6 +51,9 @@ class Stack(StackLayout):
         #b2.bind(on_press = callback)
         #self.add_widget(b1)
         #self.add_widget(b2)
+
+class Log(ScrollView):
+    print(notif_log())
 
 
 class Anchor(AnchorLayout):
