@@ -12,9 +12,9 @@ from tensorflow.keras.layers import Layer, Conv2D, Dense, MaxPooling2D, Input, F
 import tensorflow as tf
 
 # Avoid OOM rrros by settign the GPU Consumption Growth
-gpus = tf.config.experimental.list_physical_devices('GPU')
-for gpu in gpus:
-    tf.config.experimental.set_memory_growth(gpu, True)
+#gpus = tf.config.experimental.list_physical_devices('GPU')
+#for gpu in gpus:
+#    tf.config.experimental.set_memory_growth(gpu, True)
 
 # Setup paths
 POS_PATH = os.path.join("data", "positive")
@@ -120,8 +120,8 @@ class L1Dist(Layer):
 l1 = L1Dist()
 
 def make_siamese_model():
-    input_image = Input(name='input_img', shape=(100, 100, 3))
-    validation_image = Input(name='validation_img', shape=(100, 100, 3))
+    input_image = Input(name='input_img', shape=(105, 105, 3))
+    validation_image = Input(name='validation_img', shape=(105, 105, 3))
 
     siamese_layer = L1Dist()
     siamese_layer._name = 'distance'
@@ -131,4 +131,39 @@ def make_siamese_model():
     return Model(inputs=[input_image, validation_image], outputs=classifier, name='SiameseNetwork')
 
 siamese_model = make_siamese_model()
-print(siamese_model.summary())
+#print(siamese_model.summary())
+
+binary_cross_loss = tf.losses.BinaryCrossentropy()
+opt = tf.keras.optimizers.Adam(1e-4)
+
+checkpoint_dir = './training_checkpoints'
+checkpoint_prefix = os.path.join(checkpoint_dir, 'ckpt')
+checkpoint = tf.train.Checkpoint(opt=opt, siamese_model=siamese_model)
+
+@tf.function
+def train_step(batch):
+    with tf.GradientTape() as tape:
+        X = batch[:2]
+        y = batch[2]
+        yhat = siamese_model(X, training=True)
+        loss = binary_cross_loss(y, yhat)
+
+    grad = tape.gradient(loss, siamese_model.trainable_variables)
+    opt.apply_gradients(zip(grad, siamese_model.trainable_variables))
+
+    return loss
+
+def train(data, EPOCHS):
+    for epoch in range(1, EPOCHS+1):
+        print('\n Epoch {}/{}'.format(epoch, EPOCHS))
+        progbar = tf.keras.utils.Progbar(len(data))
+
+        for idx, batch in enumerate(data):
+            train_step(batch)
+            progbar.update(idx+1)
+
+        if epoch % 10 == 0:
+            checkpoint.save(file_prefix=checkpoint_prefix)
+
+EPOCHS = 50
+train(trainData, EPOCHS)
