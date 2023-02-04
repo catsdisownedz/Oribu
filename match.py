@@ -6,15 +6,15 @@ import time
 import uuid
 from matplotlib import pyplot as plt
 
-# Functional-API
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Layer, Conv2D, Dense, MaxPooling2D, Input, Flatten
+#Functional-API
+from tensorflow.python.keras.models import Model
+from tensorflow.python.keras.layers import Layer, Conv2D, Dense, MaxPooling2D, Input, Flatten
 import tensorflow as tf
 
-# Avoid OOM rrros by settign the GPU Consumption Growth
+#Avoid OOM rrros by settign the GPU Consumption Growth
 gpus = tf.config.experimental.list_physical_devices('GPU')
 for gpu in gpus:
-    tf.config.experimental.set_memory_growth(gpu, True)
+   tf.config.experimental.set_memory_growth(gpu, True)
 
 # Setup paths
 POS_PATH = os.path.join("data", "positive")
@@ -27,38 +27,38 @@ os.makedirs(NEG_PATH)
 os.makedirs(ANC_PATH)
 '''
 
-cap = cv2.VideoCapture(0)
+# cap = cv2.VideoCapture(0)
 
-shiftY = 350 
-shiftX = 520
+# shiftY = 350 
+# shiftX = 520
 
-while cap.isOpened():
-    ret, frame = cap.read()
+# while cap.isOpened():
+#     ret, frame = cap.read()
 
-    frame = frame[shiftY:shiftY+250, shiftX:shiftX+250, :]
+#     frame = frame[max(0, shiftY):min(shiftY+250, len(frame)), max(0, shiftX):min(len(frame[0]), shiftX+250), :]
 
-    if cv2.waitKey(1) & 0XFF == ord('o'):
-        imgName = os.path.join(ANC_PATH, '{}.jpg'.format(uuid.uuid1()))
-        cv2.imwrite(imgName, frame)
-    if cv2.waitKey(1) & 0XFF == ord('p'):
-        imgName = os.path.join(POS_PATH, '{}.jpg'.format(uuid.uuid1()))
-        cv2.imwrite(imgName, frame)
-    if cv2.waitKey(1) & 0XFF == ord('q'):
-        break
-    if cv2.waitKey(1) & 0XFF == ord('w'):
-        shiftY -= 10
-    if cv2.waitKey(1) & 0XFF == ord('s'):
-        shiftY += 10
-    if cv2.waitKey(1) & 0XFF == ord('d'):
-        shiftX += 10
-    if cv2.waitKey(1) & 0XFF == ord('a'):
-        shiftX -= 10
-    cv2.imshow('Image Collection', frame)
+#     if cv2.waitKey(1) & 0XFF == ord('o'):
+#         imgName = os.path.join(ANC_PATH, '{}.jpg'.format(uuid.uuid1()))
+#         cv2.imwrite(imgName, frame)
+#     if cv2.waitKey(1) & 0XFF == ord('p'):
+#         imgName = os.path.join(POS_PATH, '{}.jpg'.format(uuid.uuid1()))
+#         cv2.imwrite(imgName, frame)
+#     if cv2.waitKey(1) & 0XFF == ord('q'):
+#         break
+#     if cv2.waitKey(1) & 0XFF == ord('w'):
+#         shiftY -= 10
+#     if cv2.waitKey(1) & 0XFF == ord('s'):
+#         shiftY += 10
+#     if cv2.waitKey(1) & 0XFF == ord('d'):
+#         shiftX += 10
+#     if cv2.waitKey(1) & 0XFF == ord('a'):
+#         shiftX -= 10
+#     cv2.imshow('Image Collection', frame)
 
 
-cap.release()
-cv2.destroyAllWindows()
-'''
+# cap.release()
+# cv2.destroyAllWindows()
+
 anchor = tf.data.Dataset.list_files(os.path.join(ANC_PATH, "*.jpg")).take(300)
 positive = tf.data.Dataset.list_files(os.path.join(POS_PATH, "*.jpg")).take(300)
 negative = tf.data.Dataset.list_files(os.path.join(NEG_PATH, "*.jpg")).take(300)
@@ -166,4 +166,4 @@ def train(data, EPOCHS):
 
 EPOCHS = 50
 train(trainData, EPOCHS)
-'''
+
