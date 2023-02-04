@@ -1,3 +1,4 @@
+import kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
@@ -7,16 +8,7 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.widget import Widget
 from plyer import notification
-import logging
 
-def notif_log():
-    log = logging.getLogger("Notifications")
-    handler = logging.FileHandler('Notifications.log')
-    formatter = logging.Formatter('%(asctime)s\n %(message)s')
-    handler.setFormatter(formatter)
-    log.addHandler(handler)
-
-    log.info("test custom")
 
 '''def crim_sighting():
     name = name
@@ -53,7 +45,7 @@ class Stack(StackLayout):
         #self.add_widget(b2)
 
 class Log(ScrollView):
-    print(notif_log())
+    pass
 
 
 class Anchor(AnchorLayout):
@@ -71,11 +63,11 @@ class Box(BoxLayout):
         self.add_widget(b2)
 '''
         
-class MainWidget (Widget):
+class MainWidget(Widget):
     pass
     
 
-class CrimeApp (App):
+class CrimeApp(App):
     pass
 
   #if isIdentified = True:  
