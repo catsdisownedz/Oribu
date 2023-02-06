@@ -1,3 +1,7 @@
+#runs through the entire dataset and compares the anchor with the images stored:
+# returns 1 if the anchor matches with a face in the criminal folder 
+# returns 0 if the anchor if there is no match with anyone in the folder
+
 import os
 import time
 from notif.sms.sms import notify
