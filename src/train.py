@@ -1,3 +1,5 @@
+#also trains and tests our ai
+
 import os
 import random
 import numpy as np
