@@ -1,8 +1,8 @@
 import os
 from twilio.rest import Client
 
-# Set environment variables for your credentials
-# Read more at http://twil.io/secure
+#we are using twilio website for the SMS service and integrated it into our code, inshallah we will continue where we left off and make a better application instead 
+
 def notify(name):
     print("Sending...")
     account_sid = "AC543df96bf9583d51952e0201ba3a18c0"
