@@ -2,6 +2,7 @@ import os
 from twilio.rest import Client
 
 #we are using twilio website for the SMS service and integrated it into our code
+
 def notify(name):
     print("Sending...")
     account_sid = "AC543df96bf9583d51952e0201ba3a18c0"
