@@ -1,7 +1,7 @@
 import os
 from twilio.rest import Client
 
-#we are using twilio website for the SMS service and integrated it into our code
+#we are using twilio website for the SMS service and integrated it into our code, inshallah we will continue where we left off and make a better application instead 
 
 def notify(name):
     print("Sending...")
