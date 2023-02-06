@@ -1,3 +1,5 @@
+#we use this for collecting data for training and we do not need it currently for the ai
+
 import cv2
 import os
 #import random
