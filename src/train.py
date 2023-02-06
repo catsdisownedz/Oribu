@@ -46,10 +46,10 @@ trainData = data.take(round(len(data)*.7))
 trainData = trainData.batch(16)
 trainData = trainData.prefetch(8)
 
-testData = data.skip(round(len(data)*.7))
-testData = data.take(round(len(data)*.3))
-testData = testData.batch(16)
-testData = testData.prefetch(8)
+test_data = data.skip(round(len(data)*.7))
+test_data = data.take(round(len(data)*.3))
+test_data = test_data.batch(16)
+test_data = test_data.prefetch(8)
 
 def make_embedding():
     inp = Input(shape=(105, 105, 3), name='input_image')
@@ -126,4 +126,6 @@ def train(data, EPOCHS):
             checkpoint.save(file_prefix=checkpoint_prefix)
 
 EPOCHS = 50
-train(trainData, EPOCHS)
+#train(trainData, EPOCHS)
+
+

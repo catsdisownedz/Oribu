@@ -10,12 +10,11 @@ def notify(name):
     auth_token = "8a5f7873453b3dfbb6d6872548f0b613"
     client = Client(account_sid, auth_token)
 
-    message = client.messages.create(
-            body="Alert!\n Criminal: {} is found near (the webcam :P)".format(name),
-        from_="+16509552472",
-        to="+201000024633"
-    )
+    #message = client.messages.create(
+    #        body="Alert!\n Criminal: {} is found near (the webcam :P)".format(name),
+    #    from_="+16509552472",
+    #    to="+201000024633"
+    #)
 
-    print(message.sid)
+    #print(message.sid)
 
-notify("Zeina")

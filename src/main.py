@@ -8,7 +8,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 import sys 
-import tensorflow as tf
 
 anc_path = os.path.join('..', 'data' , 'anchor')
 face_cascade_path = "/Users/hamed/documents/obiru/env/lib/python3.11/site-packages/cv2/data/haarcascade_frontalface_default.xml"
