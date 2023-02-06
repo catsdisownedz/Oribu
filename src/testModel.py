@@ -1,3 +1,5 @@
+#trains and tests our ai 
+
 from train import test_data, siamese_model
 from tensorflow.keras.metrics import Precision, Recall
 from matplotlib import pyplot as plt
