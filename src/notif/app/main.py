@@ -1,3 +1,5 @@
+#we originally were going to make an app so that the ai could send a notification to the user through it when the criminal is identified but we scrapped it (for now) due to shortage of time and we eventually found the more convenient way to send a SMS in the "notif" folder
+
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
