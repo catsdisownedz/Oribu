@@ -29,10 +29,6 @@ while True:
         imgname = os.path.join(anc_path,f'{str(uuid.uuid1())}.jpg')
         cv2.imwrite(imgname,face)
 
-    if cv2.waitKey(1) & 0xFF == ord('p'):
-        imgname = os.path.join(pos_path, '{}.jpg'.format(uuid.uuid1()))
-        cv2.imwrite(imgname, frame)
-
     #showing the frame  
     cv2.imshow('Video', frame)
     
